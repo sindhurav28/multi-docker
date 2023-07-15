@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kiransaras/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run kiransaras/react-test npm test -- --coverage
+  - docker run -e CI=true USERNAME/react-test npm test
+
+after_success:
+ - docker build -t kiransaras/multi-client ./client
+ - docker build -t kiransaras/multi-nginx ./nginx
+ - docker build -t kiransaras/multi-server ./server
+ - docker build -t kiransaras/multi-worker ./worker
