@@ -14,3 +14,8 @@ after_success:
  - docker build -t kiransaras/multi-nginx ./nginx
  - docker build -t kiransaras/multi-server ./server
  - docker build -t kiransaras/multi-worker ./worker
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+ - docker push kiransaras/multi-client
+ - docker push kiransaras/multi-nginx 
+ - docker push kiransaras/multi-server
+ - docker push kiransaras/multi-worker
