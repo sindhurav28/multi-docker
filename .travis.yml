@@ -6,8 +6,7 @@ before_install:
   - docker build -t kiransaras/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run kiransaras/react-test npm test -- --coverage
-  - docker run -e CI=true USERNAME/react-test npm test
+  - docker run -e CI=true kiransaras/react-test npm test
 
 after_success:
  - docker build -t kiransaras/multi-client ./client
